@@ -77,3 +77,5 @@ Korea MCT Summit 2026 운영팀
 
 이틀간의 일정은 마무리됐지만, 우리 커뮤니티의 성장은 계속됩니다.
 다음 자리에서 더 반갑게 만나겠습니다. 고맙습니다.
+
+<img width="1910" height="6688" alt="1" src="https://github.com/user-attachments/assets/98808507-06c8-4b49-ba7e-41a43781ca87" />
