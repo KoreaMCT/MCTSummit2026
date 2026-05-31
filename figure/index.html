@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Korea MCT Summit 2026 - Figure Gallery</title>
+  <style>
+    :root {
+      --bg: #f7f2ea;
+      --ink: #1d232f;
+      --muted: #5b6678;
+      --brand: #0e5aa7;
+      --accent: #cc4a1f;
+      --card: #ffffff;
+      --ring: rgba(14, 90, 167, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Segoe UI", "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, #f2dfc6 0%, transparent 42%),
+        radial-gradient(circle at 84% 24%, #dce9f7 0%, transparent 38%),
+        linear-gradient(135deg, #fff8ef 0%, var(--bg) 60%, #eef3f8 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 32px 18px 64px;
+    }
+
+    header {
+      border: 1px solid #e6dccf;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 24px rgba(29, 35, 47, 0.08);
+      padding: 24px;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      animation: drop-in 420ms ease-out;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .meta {
+      margin-top: 14px;
+      color: var(--brand);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid #e8e8eb;
+      background: var(--card);
+      box-shadow: 0 8px 20px rgba(16, 26, 41, 0.08);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      animation: reveal 420ms ease both;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--ring);
+      box-shadow: 0 16px 30px rgba(16, 26, 41, 0.14);
+    }
+
+    .thumb {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      background: #f0f3f8;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .label {
+      margin: 0;
+      padding: 10px 12px;
+      font-size: 0.92rem;
+      color: #2f3b4f;
+      border-top: 1px solid #edf1f7;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    dialog {
+      width: min(96vw, 1100px);
+      border: none;
+      padding: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #111;
+    }
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.65);
+    }
+
+    .viewer img {
+      width: 100%;
+      max-height: 88vh;
+      object-fit: contain;
+      background: #111;
+      display: block;
+    }
+
+    .viewer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      color: #d5d9e4;
+      background: #1a202c;
+      font-size: 0.95rem;
+    }
+
+    .close-btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 7px 11px;
+      color: #fff;
+      background: var(--accent);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .close-btn:hover {
+      filter: brightness(1.06);
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes drop-in {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 18px 12px 36px;
+      }
+
+      .thumb {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>Korea MCT Summit 2026 Figure Gallery</h1>
+      <p class="subtitle">발표 현장 사진을 한 페이지에서 모아볼 수 있는 갤러리입니다. 이미지를 클릭하면 크게 볼 수 있습니다.</p>
+      <p class="meta" id="count"></p>
+    </header>
+
+    <section class="grid" id="gallery" aria-label="Figure image gallery"></section>
+  </main>
+
+  <dialog id="viewer">
+    <div class="viewer">
+      <img id="viewerImage" alt="Selected figure image" />
+      <div class="viewer-bar">
+        <span id="viewerCaption"></span>
+        <button class="close-btn" id="closeViewer" type="button">닫기</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const images = [
+      "neww_배준오.png",
+      "new_구병국.png",
+      "new_김도균.png",
+      "new_김성미.png",
+      "new_김영욱.png",
+      "new_김진석.png",
+      "new_로한.png",
+      "new_박결.png",
+      "new_박민욱.png",
+      "new_박민진.png",
+      "new_안성진.png",
+      "new_윌리암.png",
+      "new_유승호.png",
+      "new_유저스틴.png",
+      "new_이소영.png",
+      "new_이정구.png",
+      "new_전규리.png",
+      "new_전대호.png",
+      "new_조슈아.png",
+      "new_진미나.png",
+      "new_최영락.png",
+      "new_최정우.png",
+      "new_허석.png"
+    ];
+
+    const gallery = document.getElementById("gallery");
+    const count = document.getElementById("count");
+    const viewer = document.getElementById("viewer");
+    const viewerImage = document.getElementById("viewerImage");
+    const viewerCaption = document.getElementById("viewerCaption");
+    const closeViewer = document.getElementById("closeViewer");
+
+    count.textContent = `총 ${images.length}장의 발표 현장 이미지`;
+
+    function normalizeCaption(fileName) {
+      return fileName
+        .replace(/^neww?_/, "")
+        .replace(/\.png$/i, "");
+    }
+
+    function openViewer(src, caption) {
+      viewerImage.src = src;
+      viewerImage.alt = caption;
+      viewerCaption.textContent = caption;
+      viewer.showModal();
+    }
+
+    images.forEach((fileName, index) => {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.style.animationDelay = `${index * 26}ms`;
+
+      const imageSrc = encodeURI(fileName);
+      const caption = normalizeCaption(fileName);
+
+      const img = document.createElement("img");
+      img.className = "thumb";
+      img.src = imageSrc;
+      img.alt = caption;
+      img.loading = "lazy";
+      img.addEventListener("click", () => openViewer(imageSrc, caption));
+
+      const label = document.createElement("p");
+      label.className = "label";
+      label.title = caption;
+      label.textContent = caption;
+
+      card.appendChild(img);
+      card.appendChild(label);
+      gallery.appendChild(card);
+    });
+
+    closeViewer.addEventListener("click", () => viewer.close());
+    viewer.addEventListener("click", (event) => {
+      if (event.target === viewer) {
+        viewer.close();
+      }
+    });
+  </script>
+</body>
+</html>
