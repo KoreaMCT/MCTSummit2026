@@ -63,6 +63,14 @@ Korea MCT Summit 2026이 더욱 의미 있는 시간이 될 수 있었습니다.
 - [figure 갤러리 바로가기 (GitHub 보기)](./figure/README.md)
 - [figure 폴더 바로가기](./figure/)
 
+## 저작권 및 라이선스
+
+이 저장소의 자료는 누구나 사용할 수 있지만, 각 자료의 저작권은 해당 저작자에게 있습니다.
+한국어 안내 문서와 영문 라이선스 원문을 병행 제공하며, 법적 기준은 영문 라이선스 원문을 우선합니다.
+
+- 저작권 안내: [COPYRIGHT.md](./COPYRIGHT.md)
+- 라이선스: [LICENSE](./LICENSE) (CC BY 4.0)
+
 ## 함께 만든 운영팀
 
 Korea MCT Summit 2026 운영팀
