@@ -60,7 +60,8 @@ Korea MCT Summit 2026이 더욱 의미 있는 시간이 될 수 있었습니다.
 
 발표별 현장 이미지를 한 페이지에서 볼 수 있도록 갤러리를 추가했습니다.
 
-- [figure 갤러리 바로가기](./figure/index.html)
+- [figure 갤러리 바로가기 (GitHub 보기)](./figure/README.md)
+- [figure 갤러리 바로가기 (로컬 HTML)](./figure/index.html)
 - [figure 폴더 바로가기](./figure/)
 
 ## 함께 만든 운영팀
